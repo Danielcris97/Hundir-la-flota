@@ -5,9 +5,6 @@ def crear_tablero():
     return tablero
 
 
-# barco_1 = [[0,3], [0,4], [0,5], [0,6]]
-# barco_jugador = [[[0,3], [0,4], [0,5], [0,6]], [[4,7], [5,7], [6,7]], [[8,8], [8,9]], [[1,7]]]
-
 def colocar_barcos(tablero, barcos):
     for  i in barcos:
         for j in i:
@@ -15,30 +12,48 @@ def colocar_barcos(tablero, barcos):
         
     return tablero
 
-def disparo(tablero):
-    fila = int(input("selecciona la fila"))
-    columna = int(input("selecciona la columna"))
+def disparo(tablero, tablero2):
+    fila = int(input("selecciona la fila 0-9 "))
+    columna = int(input("selecciona la columna 0-9 "))
+    o_count1 = np.count_nonzero(tablero == "O")
+    if fila < 0 or columna < 0:
+        print("error intenta otra vez")
+        disparo(tablero,tablero2)
+    if fila > 9 or columna > 9:
+        print("error intenta otra vez")
+        disparo(tablero,tablero2)
     if tablero[fila,columna] =="O":
         tablero[fila,columna] = "X"
+        tablero2[fila,columna] = "X"
         print("¡¡¡IMPACTOOOOO!!!")
+        o_count = np.count_nonzero(tablero == "O")
+        if o_count == o_count1 - 1:
+            disparo(tablero,tablero2)
     elif tablero[fila,columna] == "#" or tablero[fila, columna] == "X":
         print("Posiccion ya seleccionada")
-        disparo()
+        disparo(tablero,tablero2)    
     else:
         tablero[fila,columna] = "#"
+        tablero2[fila,columna] = "#"
         print("FALLASTE :)")
     return tablero
-def disparo_rival(tablero):
-    fila = np.random.random_integers(0, 10)
-    columna = np.random.random_integers(0, 10)
+def disparo_rival(tablero,tablero2):
+    fila = np.random.random_integers(0, 9)
+    columna = np.random.random_integers(0, 9)
+    o_count1 = np.count_nonzero(tablero == "O")
     if tablero[fila,columna] =="O":
         tablero[fila,columna] = "X"
+        tablero2[fila,columna] = "X"
+        o_count = np.count_nonzero(tablero == "O")
         print("¡¡¡IMPACTOOOOO DEL RIVAL!!!")
+        if o_count == o_count1 - 1:
+            disparo_rival(tablero,tablero2)
     elif tablero[fila,columna] == "#" or tablero[fila, columna] == "X":
-        print("Posiccion ya seleccionada rival")
-        disparo()
+        print("Posiccion ya seleccionada por el rival")
+        disparo_rival(tablero,tablero2)
     else:
         tablero[fila,columna] = "#"
+        tablero2[fila,columna] = "#"
         print("FALLO DEL RIVAL :)")
     return tablero
 
