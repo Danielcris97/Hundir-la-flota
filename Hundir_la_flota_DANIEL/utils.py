@@ -1,7 +1,6 @@
 import numpy as np
 import variables as vr
 
-turno_jugador = np.random.random_integers(0, 1)
 def crear_tablero():
     tablero = np.full((10,10), "_")
     return tablero
