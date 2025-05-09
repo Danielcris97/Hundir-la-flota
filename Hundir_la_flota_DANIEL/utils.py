@@ -13,16 +13,16 @@ def colocar_barcos(tablero, barcos):
             tablero[j[0], j[1]] = "O" 
     return tablero
 
-def disparo(tablero, tablero2):
+def disparo(tablero, tablero2): #tablero 2 es el tablero de disparos
     fila = int(input("selecciona la fila 0-9 "))
     columna = int(input("selecciona la columna 0-9 "))
-    o_count1 = np.count_nonzero(tablero == "O")
+    o_count1 = np.count_nonzero(tablero == "O") #contar los barcos antes de disparar
 
     if fila < 0 or columna < 0 or fila > 9 or columna > 9:
-        print("error intenta otra vez")
+        print("error intenta otra vez") #condición para verificar si los valores están entre 0 y 9
         return disparo(tablero, tablero2)
 
-    if tablero[fila, columna] == "O":
+    if tablero[fila, columna] == "O": #si hay una O coloca una X de impacto
         tablero[fila, columna] = "X"
         tablero2[fila, columna] = "X"
         print("¡¡¡IMPACTOOOOO!!!")
