@@ -36,19 +36,19 @@ def juego():
      while True:
         if vr.turno_jugador == 1: #si el random es 1 inicia el rival
             print("\nTurno del RIVAL")
-            utils.disparo_rival(tablero_jugador_barcos, tablero_rival_disparos)
-            if np.count_nonzero(tablero_jugador_barcos == "O") == 0: #contar los barcos
+            utils.disparo_rival(tablero_jugador_barcos, tablero_rival_disparos) #rival dispara en tablero jugador y guarda su disparo
+            if np.count_nonzero(tablero_jugador_barcos == "O") == 0: #contar los barcos, si es 0 pierde
                 print("¡El rival ha ganado! :(")
                 break
 
-            print("Ahora es tu turno")
+            print("Ahora es tu turno") #cambio de turno
             utils.disparo(tablero_rival_barcos, tablero_jugador_disparos)
-            if np.count_nonzero(tablero_rival_barcos == "O") == 0:
+            if np.count_nonzero(tablero_rival_barcos == "O") == 0: #si el rival no tiene barco has ganado
                 print("¡Tú has ganado! ¡Felicidades! :)")
                 break
 
         else:
-            print("\nTu turno!")
+            print("\nTu turno!") #si el random es 0 inicia el jugador
             utils.disparo(tablero_rival_barcos, tablero_jugador_disparos)
             if np.count_nonzero(tablero_rival_barcos == "O") == 0:
                 print("¡Tú has ganado! ¡Felicidades! :)")
@@ -61,7 +61,7 @@ def juego():
                 break
 
         print_tableros()
-
+#inicio del juego, colocar barcos y tableros vacios
 utils.colocar_barcos(tablero_jugador_barcos, vr.barcos_jugador)
 utils.colocar_barcos(tablero_rival_barcos, vr.barcos_rival)
 print_tableros()
